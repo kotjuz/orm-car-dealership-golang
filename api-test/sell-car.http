@@ -1,6 +1,1 @@
-DELETE http://localhost:8080/car/sell
-content-type: application/json
-
-{
-    "vin": "JTDKB20U687923335"
-}
+DELETE http://localhost:8080/car/sell/TEST1111111111111

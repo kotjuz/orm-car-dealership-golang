@@ -1,0 +1,13 @@
+POST http://localhost:8080/car/add
+content-type: application/json
+
+{
+    "VIN": "TEST1111111111111",
+    "RokProdukcji": 2021,
+    "Przebieg": 30000,
+    "SkrzyniaBiegow": "manualna",
+    "TypSil": 3,
+    "KrajPochodzenia": "USA",
+    "ModelID": 3,
+    "DealerNazwa": "Nordic Cars"
+}
