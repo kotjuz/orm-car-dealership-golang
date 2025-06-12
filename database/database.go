@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"example.com/ormproject/models"
+	"github.com/lpernett/godotenv"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 )
@@ -12,15 +13,19 @@ import (
 var DB *gorm.DB
 
 func Connect() {
+	err := godotenv.Load()
+
+	if err != nil {
+		panic("Could not load env")
+	}
 
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 	host := os.Getenv("DB_HOST")
-	instance := os.Getenv("DB_INSTANCE")
 	database := os.Getenv("DB_NAME")
 
-	dsn := fmt.Sprintf("sqlserver://%s:%s@%s\\%s?database=%s&TrustServerCertificate=true",
-		user, password, host, instance, database)
+	dsn := fmt.Sprintf("sqlserver://%s:%s@%s?database=%s&TrustServerCertificate=true",
+		user, password, host, database)
 
 	db, err := gorm.Open(sqlserver.Open(dsn), &gorm.Config{})
 
