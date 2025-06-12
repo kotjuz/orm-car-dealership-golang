@@ -8,7 +8,7 @@ type Model struct {
 	LiczbaPasazerow    int
 	PojemnoscBagaznika int
 	Ladownosc          int
-	Poprzednik         int
+	Poprzednik         *int
 	MarkaNazwa         string `gorm:"size:100"`
 
 	Marka          Marka  `gorm:"foreignKey:MarkaNazwa;references:Nazwa"`

@@ -63,6 +63,17 @@ func SeedData() {
 		DB.FirstOrCreate(&m, models.Marka{Nazwa: m.Nazwa})
 	}
 
+	var nilPoprzednik *int = nil
+
+	modele := []models.Model{
+		{ID: 1, Nazwa: "Corolla", RokWprowadzenia: 2020, Typ: "osobowy", LiczbaPasazerow: 5, PojemnoscBagaznika: 450, Poprzednik: nilPoprzednik, MarkaNazwa: "Toyota"},
+		{ID: 2, Nazwa: "XC60", RokWprowadzenia: 2021, Typ: "ciezarowy", Ladownosc: 2000, Poprzednik: nilPoprzednik, MarkaNazwa: "Volvo"},
+		{ID: 3, Nazwa: "Focus", RokWprowadzenia: 2019, Typ: "osobowy", LiczbaPasazerow: 5, PojemnoscBagaznika: 350, Poprzednik: nilPoprzednik, MarkaNazwa: "Ford"},
+	}
+	for _, m := range modele {
+		DB.FirstOrCreate(&m, models.Model{ID: m.ID})
+	}
+
 	silniki := []models.TypSilnika{
 		{ID: 1, RodzajPaliwa: "benzyna", OpisParametrow: "1.6L, 120KM"},
 		{ID: 2, RodzajPaliwa: "diesel", OpisParametrow: "2.0L, 150KM"},
@@ -70,26 +81,6 @@ func SeedData() {
 	}
 	for _, s := range silniki {
 		DB.FirstOrCreate(&s, models.TypSilnika{ID: s.ID})
-	}
-
-	modele := []models.Model{
-		{ID: 1, Nazwa: "Corolla", RokWprowadzenia: 2020, Typ: "osobowy", LiczbaPasazerow: 5, PojemnoscBagaznika: 450, MarkaNazwa: "Toyota"},
-		{ID: 2, Nazwa: "XC60", RokWprowadzenia: 2021, Typ: "ciezarowy", Ladownosc: 2000, MarkaNazwa: "Volvo"},
-		{ID: 3, Nazwa: "Focus", RokWprowadzenia: 2019, Typ: "osobowy", LiczbaPasazerow: 5, PojemnoscBagaznika: 350, MarkaNazwa: "Ford"},
-	}
-	for _, m := range modele {
-		DB.FirstOrCreate(&m, models.Model{ID: m.ID})
-	}
-
-	posSilniki := []models.PosSilnik{
-		{TypSilId: 1, ModelId: 1},
-		{TypSilId: 1, ModelId: 2},
-		{TypSilId: 1, ModelId: 3},
-		{TypSilId: 2, ModelId: 2},
-		{TypSilId: 3, ModelId: 3},
-	}
-	for _, ps := range posSilniki {
-		DB.FirstOrCreate(&ps, models.PosSilnik{TypSilId: ps.TypSilId, ModelId: ps.ModelId})
 	}
 
 	dealerzy := []models.Dealer{
@@ -117,5 +108,16 @@ func SeedData() {
 	}
 	for _, sp := range sprzedaze {
 		DB.FirstOrCreate(&sp, models.Sprzedaz{Data: sp.Data, DealerNazwa: sp.DealerNazwa, SamochodVIN: sp.SamochodVIN})
+	}
+
+	posSilniki := []models.PosSilnik{
+		{TypSilId: 1, ModelId: 1},
+		{TypSilId: 1, ModelId: 2},
+		{TypSilId: 1, ModelId: 3},
+		{TypSilId: 2, ModelId: 2},
+		{TypSilId: 3, ModelId: 3},
+	}
+	for _, ps := range posSilniki {
+		DB.FirstOrCreate(&ps, models.PosSilnik{TypSilId: ps.TypSilId, ModelId: ps.ModelId})
 	}
 }
