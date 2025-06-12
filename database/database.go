@@ -41,5 +41,6 @@ func Connect() {
 		&models.TypSilnika{},
 		&models.Dealer{},
 		&models.Model{},
+		&models.Sprzedaz{},
 	)
 }
