@@ -9,23 +9,21 @@ import (
 )
 
 func sellCar(context *gin.Context) {
-	var vin string
-	err := context.ShouldBindJSON(&vin)
+	vin := context.Param("vin")
 
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data"})
-		return
-	}
+	// if err != nil {
+	// 	context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data"})
+	// 	return
+	// }
 
-	var car models.Samochod
-
-	result := database.DB.Model(&models.Samochod{}).First(&car, "VIN = ?", vin)
+	var count int64
+	result := database.DB.Model(&models.Samochod{}).Where("VIN = ?", vin).Count(&count)
 
 	if result.Error != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "There is no such car in database"})
 		return
 	}
 
-	database.DB.sp
+	context.JSON(http.StatusAccepted, gin.H{"message": count})
 
 }
