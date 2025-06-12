@@ -10,20 +10,20 @@ import (
 
 func sellCar(context *gin.Context) {
 	vin := context.Param("vin")
-
-	// if err != nil {
-	// 	context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data"})
-	// 	return
-	// }
-
 	var count int64
-	result := database.DB.Model(&models.Samochod{}).Where("VIN = ?", vin).Count(&count)
 
+	result := database.DB.Model(&models.Samochod{}).Where("VIN = ?", vin).Count(&count)
 	if result.Error != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "There is no such car in database"})
 		return
 	}
 
-	context.JSON(http.StatusAccepted, gin.H{"message": count})
+	result = database.DB.Delete(&models.Samochod{}, "VIN = ?", vin)
+	if result.Error != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to delete car"})
+		return
+	}
+
+	context.JSON(http.StatusAccepted, gin.H{"message": "Succesfully deleted car"})
 
 }

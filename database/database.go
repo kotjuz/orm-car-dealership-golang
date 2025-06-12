@@ -96,6 +96,7 @@ func SeedData() {
 		{VIN: "JTDKB20U687923335", RokProdukcji: 2022, Przebieg: 15000, SkrzyniaBiegow: "automatyczna", TypSil: 1, KrajPochodzenia: "Japonia", ModelID: 1, DealerNazwa: "Auto Świat"},
 		{VIN: "YV1LW58T6Y2512365", RokProdukcji: 2023, Przebieg: 5000, SkrzyniaBiegow: "manualna", TypSil: 2, KrajPochodzenia: "Szwecja", ModelID: 2, DealerNazwa: "Nordic Cars"},
 		{VIN: "WF0DP3TH5J4125632", RokProdukcji: 2021, Przebieg: 30000, SkrzyniaBiegow: "manualna", TypSil: 3, KrajPochodzenia: "USA", ModelID: 3, DealerNazwa: "Fast Wheels"},
+		{VIN: "TEST1111111111111", RokProdukcji: 2021, Przebieg: 30000, SkrzyniaBiegow: "manualna", TypSil: 3, KrajPochodzenia: "USA", ModelID: 3, DealerNazwa: "Nordic Cars"},
 	}
 	for _, s := range samochody {
 		DB.FirstOrCreate(&s, models.Samochod{VIN: s.VIN})
