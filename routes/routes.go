@@ -1,11 +1,8 @@
 package routes
 
-import (
-	"github.com/gin-gonic/gin"
-)
+import "github.com/gin-gonic/gin"
 
-func main() {
-	server := gin.Default()
-
-	server.Run(":8080")
+func RegisterRoutes(server *gin.Engine) {
+	server.POST("/car/add")
+	server.DELETE("/car/sell", sellCar)
 }
