@@ -1,7 +1,7 @@
 package models
 
 type TypSilnika struct {
-	id             int
-	rodzajPaliwa   string
-	opisParametrow string
+	ID             int `gorm:"primaryKey"`
+	RodzajPaliwa   string
+	OpisParametrow string
 }

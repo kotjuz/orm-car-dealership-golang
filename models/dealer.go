@@ -1,6 +1,6 @@
 package models
 
 type Dealer struct {
-	nazwa  string
-	adrest string
+	Nazwa string `gorm:"primaryKey"`
+	Adres string
 }
