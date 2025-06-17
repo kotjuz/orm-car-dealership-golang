@@ -71,7 +71,12 @@ func SeedData() {
 		{ID: 3, Nazwa: "Focus", RokWprowadzenia: 2019, Typ: "osobowy", LiczbaPasazerow: 5, PojemnoscBagaznika: 350, Poprzednik: nilPoprzednik, MarkaNazwa: "Ford"},
 	}
 	for _, m := range modele {
-		DB.FirstOrCreate(&m, models.Model{ID: m.ID})
+		if m.Typ == "osobowy" || m.Typ == "ciezarowy" {
+			DB.FirstOrCreate(&m, models.Model{ID: m.ID})
+		} else {
+			fmt.Println("Couldn't add to database - wrong type", m)
+		}
+
 	}
 
 	silniki := []models.TypSilnika{
